@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Demo only: hard-coded credentials
+    function checkLogin() {
+      var u = document.getElementById("username").value;
+      var p = document.getElementById("password").value;
+
+      if (u === "user123" && p === "user123") {
+        sessionStorage.setItem("username", u);
+        window.location.href = "userdashboard.html";
+      } else if (u === "admin123" && p === "admin123") {
+        sessionStorage.setItem("username", u);
+        window.location.href = "admindashboard.html";
+      } else {
+        alert("Invalid username or password.");
+      }
+      return false;
+    }
+  </script>
+</head>
+<body>
+
+  <center>
+    <h1>Login</h1>
+
+    <form onsubmit="return checkLogin();">
+      <p>
+        <label for="username">Username</label><br>
+        <input type="text" id="username" required>
+      </p>
+      <p>
+        <label for="password">Password</label><br>
+        <input type="password" id="password" required>
+      </p>
+      <button type="submit">Login</button>
+    </form>
+
+    <p>Don't have an account? <a href="signin.html">Sign up</a></p>
+    <p><a href="index.html">Back</a></p>
+  </center>
+
+</body>
+</html>

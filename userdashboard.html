@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <table class="layout" width="100%" cellpadding="15" cellspacing="0">
+    <tr>
+
+      <!-- SIDEBAR -->
+      <td class="sidebar" valign="top">
+        <img src="logo.png" alt="[Logo]" width="100">
+        <h3>Menu</h3>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#complaint">Complaint</a></li>
+          <li><a href="#report">Report</a></li>
+          <li><a href="#news">News</a></li>
+          <li><a href="#settings">Settings</a></li>
+        </ul>
+      </td>
+
+      <!-- MAIN CONTENT -->
+      <td class="content" valign="top">
+
+        <!-- HOME -->
+        <section id="home">
+          <h1>Welcome! <span id="uname">User</span></h1>
+
+          <table class="stats" cellpadding="12" cellspacing="0" width="100%">
+            <tr align="center">
+              <td><h2>5</h2>Total Complaints</td>
+              <td><h2>2</h2>In Action</td>
+              <td><h2>1</h2>Completed</td>
+              <td><h2>1</h2>Rejected</td>
+              <td><h2>1</h2>Closed</td>
+            </tr>
+          </table>
+
+          <h3>Latest Complaint <small>(<a href="#complaint">view all</a>)</small></h3>
+          <table border="1" cellpadding="8" cellspacing="0" width="100%">
+            <tr>
+              <th>ID</th><th>Date</th><th>Category</th><th>Site Address</th><th>Status</th>
+            </tr>
+            <tr>
+              <td>C005</td><td>2026-11-24</td><td>Domestic Waste</td><td>12 Jalan Mawar, Shah Alam</td><td>In Action</td>
+            </tr>
+          </table>
+        </section>
+
+        <hr>
+
+        <!-- COMPLAINT -->
+        <section id="complaint">
+          <h1>Complaints</h1>
+          <table border="1" cellpadding="8" cellspacing="0" width="100%">
+            <tr>
+              <th>ID</th><th>Date</th><th>Category</th><th>Site Address</th><th>Description</th><th>Status</th>
+            </tr>
+            <tr>
+              <td>C005</td><td>2026-11-24</td><td>Domestic Waste</td><td>12 Jalan Mawar, Shah Alam</td><td>Garbage not collected for a week.</td><td>In Action</td>
+            </tr>
+            <tr>
+              <td>C004</td><td>2026-11-18</td><td>Recycling</td><td>Block B, Taman Seri</td><td>Recycling bin is overflowing.</td><td>In Action</td>
+            </tr>
+            <tr>
+              <td>C003</td><td>2026-11-10</td><td>Public Cleaning</td><td>Jalan Pasar, Section 7</td><td>Litter along the drain.</td><td>Completed</td>
+            </tr>
+            <tr>
+              <td>C002</td><td>2026-10-29</td><td>Domestic Waste</td><td>45 Lorong Kenanga</td><td>Illegal dumping beside the house.</td><td>Rejected</td>
+            </tr>
+            <tr>
+              <td>C001</td><td>2026-10-15</td><td>Recycling</td><td>Taman Bunga Park</td><td>Missing recycling bins.</td><td>Closed</td>
+            </tr>
+          </table>
+        </section>
+
+        <hr>
+
+        <!-- REPORT -->
+        <section id="report">
+          <h1>Report a Complaint</h1>
+
+          <form id="reportForm" onsubmit="submitComplaint(); return false;">
+            <p>
+              <label for="site">Complaint Site Address</label><br>
+              <input type="text" id="site" size="50" required>
+            </p>
+
+            <p>
+              <label for="category">Complaint Category</label><br>
+              <select id="category" required>
+                <option value="">-- Select category --</option>
+                <option value="domestic">Domestic Waste</option>
+                <option value="recycling">Recycling</option>
+                <option value="cleaning">Public Cleaning</option>
+              </select>
+            </p>
+
+            <p><b>Category guide:</b></p>
+            <p><b>Domestic Waste:</b> Issues with household garbage, such as missed collection, damaged bins or illegal dumping near homes.</p>
+            <p><b>Recycling:</b> Issues with recycling services, such as full or missing recycling bins, wrongly sorted waste or collection problems.</p>
+            <p><b>Public Cleaning:</b> Issues in public areas, such as litter on roads, blocked drains, parks and market areas that need cleaning.</p>
+
+            <p>
+              <label for="description">Description</label><br>
+              <textarea id="description" rows="6" cols="60" required></textarea>
+            </p>
+
+            <p>
+              <label for="photos">Photos</label><br>
+              <input type="file" id="photos" accept="image/*" multiple>
+            </p>
+
+            <button type="submit">Submit</button>
+          </form>
+        </section>
+
+        <hr>
+
+        <!-- NEWS -->
+        <section id="news">
+          <h1>News</h1>
+
+          <article>
+            <h3>New Recycling Centres Open in Selangor</h3>
+            <p><b>Date:</b> 2026-11-20 | <b>Location:</b> Shah Alam, Selangor</p>
+            <p>Three new community recycling centres have opened to make it easier for residents to drop off paper, plastic and glass. Operating hours are 8am to 6pm daily.</p>
+          </article>
+
+          <article>
+            <h3>Separate Waste Collection Schedule Begins</h3>
+            <p><b>Date:</b> 2026-11-12 | <b>Location:</b> Petaling Jaya, Selangor</p>
+            <p>Households are reminded to separate recyclables from general waste. Recyclables will be collected every Tuesday, general waste on other days.</p>
+          </article>
+
+          <article>
+            <h3>Community Clean-Up Day This Weekend</h3>
+            <p><b>Date:</b> 2026-11-05 | <b>Location:</b> Klang, Selangor</p>
+            <p>Volunteers are invited to join a public clean-up of parks and riverside areas. Gloves and bags will be provided at the registration booth.</p>
+          </article>
+        </section>
+
+        <hr>
+
+        <!-- SETTINGS -->
+        <section id="settings">
+          <h1>Settings</h1>
+
+          <h3>Edit Profile</h3>
+          <form onsubmit="alert('Profile updated successfully.'); return false;">
+            <p>Full Name<br><input type="text" required></p>
+            <p>Email<br><input type="email" required></p>
+            <p>Phone Number<br><input type="tel" required></p>
+            <p>Address<br><textarea rows="3" cols="40" required></textarea></p>
+            <button type="submit">Save Changes</button>
+          </form>
+
+          <h3>Change Password</h3>
+          <form onsubmit="alert('Password changed successfully.'); return false;">
+            <p>Current Password<br><input type="password" required></p>
+            <p>New Password<br><input type="password" required></p>
+            <p>Confirm New Password<br><input type="password" required></p>
+            <button type="submit">Change Password</button>
+          </form>
+
+          <h3>Feedback</h3>
+          <form onsubmit="alert('Thank you for your feedback!'); this.reset(); return false;">
+            <p>Your Feedback<br><textarea rows="5" cols="50" required></textarea></p>
+            <button type="submit">Send Feedback</button>
+          </form>
+
+          <h3>Helpline</h3>
+          <p><b>Phone:</b> 1-800-000-000</p>
+          <p><b>Email:</b> support@example.com</p>
+          <p><b>Hours:</b> Monday to Friday, 8am to 5pm</p>
+
+          <h3>Logout</h3>
+          <p><a href="index.html" onclick="sessionStorage.clear();">Logout</a></p>
+        </section>
+
+      </td>
+    </tr>
+  </table>
+
+  <script>
+    // Show the logged-in username (falls back to "User")
+    var name = sessionStorage.getItem("username");
+    if (name) {
+      document.getElementById("uname").textContent = name;
+    }
+
+    // Demo: show popup, then jump to the complaint section
+    function submitComplaint() {
+      alert("Complaint submitted successfully!");
+      document.getElementById("reportForm").reset();
+      window.location.hash = "#complaint";
+    }
+  </script>
+
+</body>
+</html>

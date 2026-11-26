@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <center>
+    <h1>Sign Up</h1>
+
+    <!-- Demo only: no sign-up logic, button goes straight to the dashboard -->
+    <form onsubmit="window.location.href='userdashboard.html'; return false;">
+      <table cellpadding="5">
+        <tr>
+          <td><label for="username">Username</label></td>
+          <td><input type="text" id="username" required></td>
+        </tr>
+        <tr>
+          <td><label for="fullname">Full Name</label></td>
+          <td><input type="text" id="fullname" required></td>
+        </tr>
+        <tr>
+          <td><label for="email">Email</label></td>
+          <td><input type="email" id="email" required></td>
+        </tr>
+        <tr>
+          <td><label for="phone">Phone Number</label></td>
+          <td><input type="tel" id="phone" required></td>
+        </tr>
+        <tr>
+          <td><label for="password">Password</label></td>
+          <td><input type="password" id="password" required></td>
+        </tr>
+        <tr>
+          <td><label for="confirm">Confirm Password</label></td>
+          <td><input type="password" id="confirm" required></td>
+        </tr>
+        <tr>
+          <td><label for="idnumber">ID Number</label></td>
+          <td><input type="text" id="idnumber" required></td>
+        </tr>
+        <tr>
+          <td><label for="dob">Date of Birth</label></td>
+          <td><input type="date" id="dob" required></td>
+        </tr>
+        <tr>
+          <td><label for="gender">Gender</label></td>
+          <td>
+            <select id="gender">
+              <option>Male</option>
+              <option>Female</option>
+              <option>Prefer not to say</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="address">Address</label></td>
+          <td><textarea id="address" rows="3" cols="22" required></textarea></td>
+        </tr>
+        <tr>
+          <td><label for="postcode">Postcode</label></td>
+          <td><input type="text" id="postcode" required></td>
+        </tr>
+        <tr>
+          <td><label for="state">State</label></td>
+          <td><input type="text" id="state" required></td>
+        </tr>
+        <tr>
+          <td><label for="country">Country</label></td>
+          <td><input type="text" id="country" required></td>
+        </tr>
+      </table>
+
+      <br>
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <p>Already have an account? <a href="login.html">Login</a></p>
+    <p><a href="index.html">Back</a></p>
+  </center>
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+/* ==========================================================
+   Light, resource-friendly theme: green + white (Grab-style)
+   - No images, web fonts, animations or heavy effects
+   - Change the colours below to re-theme everything
+   ========================================================== */
+:root {
+  --green: #00b14f;
+  --green-dark: #009a44;
+  --green-deep: #0b6b36;
+  --green-light: #e8f7ee;
+  --border: #d7ecdf;
+  --bg: #f4faf6;
+  --text: #1f2d26;
+  --white: #ffffff;
+  --danger: #d63b3b;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4 { color: var(--green-deep); margin: 0.6em 0 0.4em; }
+a { color: var(--green-dark); text-decoration: none; }
+a:hover { text-decoration: underline; }
+img { max-width: 100%; height: auto; }
+hr { border: 0; border-top: 1px solid var(--border); margin: 28px 0; }
+small { color: #5b6b62; }
+
+/* ---------- Forms ---------- */
+input, select, textarea {
+  width: 100%;
+  max-width: 100%;
+  padding: 10px 12px;
+  font: inherit;
+  color: var(--text);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--green);
+}
+input[type="file"] { padding: 8px; }
+label { font-weight: 600; font-size: 0.92em; }
+
+button {
+  font: inherit;
+  font-weight: 600;
+  color: var(--white);
+  background: var(--green);
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 22px;
+  cursor: pointer;
+}
+button:hover { background: var(--green-dark); }
+
+/* Delete buttons get a softer, outlined look */
+button[onclick^="delete"] {
+  color: var(--danger);
+  background: var(--white);
+  border: 1px solid #f0c4c4;
+}
+button[onclick^="delete"]:hover { background: #fff3f3; }
+
+/* ---------- Login / Sign-up / Landing (<center> pages) ---------- */
+center {
+  display: block;
+  max-width: 480px;
+  margin: 40px auto;
+  padding: 28px 24px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+center img { width: 200px; }
+center form p, center form table { text-align: left; }
+center table { width: 100%; }
+center td { padding: 6px 4px; }
+center button { width: 100%; }
+
+/* ---------- Dashboard layout ---------- */
+.layout { width: 100%; border-collapse: collapse; }
+.layout > tbody > tr > td { padding: 20px; vertical-align: top; }
+
+.sidebar {
+  width: 210px;
+  background: var(--white);
+  border-right: 1px solid var(--border);
+}
+.sidebar img { width: 160px; }
+.sidebar ul { list-style: none; margin: 0; padding: 0; }
+.sidebar li a {
+  display: block;
+  padding: 10px 14px;
+  border-radius: 12px;
+  color: var(--text);
+  font-weight: 600;
+}
+.sidebar li a:hover {
+  background: var(--green-light);
+  color: var(--green-deep);
+  text-decoration: none;
+}
+
+.content section { overflow-x: auto; }
+
+/* ---------- One section at a time (no scrolling between sections) ----------
+   Sidebar links like #complaint show only that section.
+   Home is shown by default when no section is selected. */
+.content section { display: none; }
+.content section:target,
+.content:not(:has(section:target)) #home { display: block; }
+.content hr { display: none; }
+
+/* Highlight the active sidebar link */
+:root:not(:has(.content section:target)) .sidebar a[href="#home"],
+:root:has(#home:target) .sidebar a[href="#home"],
+:root:has(#complaint:target) .sidebar a[href="#complaint"],
+:root:has(#report:target) .sidebar a[href="#report"],
+:root:has(#news:target) .sidebar a[href="#news"],
+:root:has(#feedback:target) .sidebar a[href="#feedback"],
+:root:has(#settings:target) .sidebar a[href="#settings"] {
+  background: var(--green);
+  color: var(--white);
+}
+
+/* Welcome banner */
+#home h1 {
+  background: var(--green);
+  color: var(--white);
+  padding: 18px 20px;
+  border-radius: 16px;
+  margin-top: 0;
+}
+
+/* ---------- Count cards ---------- */
+.stats { width: calc(100% + 20px); margin: -10px; border-collapse: separate; border-spacing: 10px; }
+.stats td {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  text-align: center;
+  color: #5b6b62;
+  font-size: 0.9em;
+}
+.stats h2 { margin: 0; font-size: 1.9em; color: var(--green); }
+
+/* ---------- Data tables ---------- */
+.content table { width: 100%; border-collapse: collapse; background: var(--white); }
+.content th, .content td { padding: 10px 12px; border: 1px solid var(--border); text-align: left; }
+.content th { background: var(--green-light); color: var(--green-deep); }
+.content .stats th, .content .stats td { text-align: center; }
+.content td select { width: auto; }
+#filter { width: auto; }
+
+/* ---------- Forms inside dashboard ---------- */
+.content form { max-width: 560px; }
+
+/* ---------- News cards ---------- */
+article {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 4px 18px 14px;
+  margin-bottom: 12px;
+}
+article hr { display: none; }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 720px) {
+  .layout, .layout > tbody, .layout > tbody > tr, .layout > tbody > tr > td {
+    display: block;
+    width: 100%;
+  }
+  .sidebar { border-right: 0; border-bottom: 1px solid var(--border); }
+  .sidebar ul { display: flex; flex-wrap: wrap; gap: 6px; }
+  .stats { width: 100%; margin: 0; }
+  center { margin: 16px; }
+}

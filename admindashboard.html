@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <table class="layout" width="100%" cellpadding="15" cellspacing="0">
+    <tr>
+
+      <!-- SIDEBAR -->
+      <td class="sidebar" valign="top">
+        <img src="logo.png" alt="[Logo]" width="100">
+        <h3>Admin Menu</h3>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#complaint">Complaints</a></li>
+          <li><a href="#news">News</a></li>
+          <li><a href="#feedback">Feedback</a></li>
+          <li><a href="#settings">Settings</a></li>
+        </ul>
+      </td>
+
+      <!-- MAIN CONTENT -->
+      <td class="content" valign="top">
+
+        <!-- HOME -->
+        <section id="home">
+          <h1>Welcome! <span id="uname">Admin</span></h1>
+
+          <table class="stats" cellpadding="12" cellspacing="0" width="100%">
+            <tr align="center">
+              <td><h2 id="cTotal">0</h2>Total Complaints</td>
+              <td><h2 id="cPending">0</h2>Pending</td>
+              <td><h2 id="cAction">0</h2>In Action</td>
+              <td><h2 id="cCompleted">0</h2>Completed</td>
+              <td><h2 id="cRejected">0</h2>Rejected</td>
+              <td><h2 id="cClosed">0</h2>Closed</td>
+            </tr>
+          </table>
+
+          <h3>Latest Complaint <small>(<a href="#complaint">view all</a>)</small></h3>
+          <table border="1" cellpadding="8" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th>ID</th><th>Date</th><th>Submitted By</th><th>Category</th><th>Site Address</th><th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="latestBody"></tbody>
+          </table>
+        </section>
+
+        <hr>
+
+        <!-- COMPLAINTS -->
+        <section id="complaint">
+          <h1>Manage Complaints</h1>
+          <p>Select a new status for a complaint, then click Update.</p>
+
+          <p>
+            <label for="filter">Filter by status:</label>
+            <select id="filter" onchange="renderComplaints()">
+              <option value="All">All</option>
+              <option>Pending</option>
+              <option>In Action</option>
+              <option>Completed</option>
+              <option>Rejected</option>
+              <option>Closed</option>
+            </select>
+          </p>
+
+          <table border="1" cellpadding="8" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Submitted By</th>
+                <th>Category</th>
+                <th>Site Address</th>
+                <th>Description</th>
+                <th>Current Status</th>
+                <th>Change Status</th>
+              </tr>
+            </thead>
+            <tbody id="complaintBody"></tbody>
+          </table>
+        </section>
+
+        <hr>
+
+        <!-- NEWS -->
+        <section id="news">
+          <h1>Manage News</h1>
+
+          <h3>Add News</h3>
+          <form id="newsForm" onsubmit="addNews(); return false;">
+            <p>
+              <label for="ntitle">Title</label><br>
+              <input type="text" id="ntitle" size="50" required>
+            </p>
+            <p>
+              <label for="ndate">Date</label><br>
+              <input type="date" id="ndate" required>
+            </p>
+            <p>
+              <label for="nlocation">Location</label><br>
+              <input type="text" id="nlocation" size="50" required>
+            </p>
+            <p>
+              <label for="ncontent">News Content</label><br>
+              <textarea id="ncontent" rows="6" cols="60" required></textarea>
+            </p>
+            <button type="submit">Publish News</button>
+          </form>
+
+          <h3>Published News</h3>
+          <div id="newsList"></div>
+        </section>
+
+        <hr>
+
+        <!-- FEEDBACK -->
+        <section id="feedback">
+          <h1>User Feedback</h1>
+          <p>Total: <b id="fTotal">0</b> | New: <b id="fNew">0</b> | Reviewed: <b id="fReviewed">0</b></p>
+
+          <table border="1" cellpadding="8" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>User</th>
+                <th>Feedback</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="feedbackBody"></tbody>
+          </table>
+        </section>
+
+        <hr>
+
+        <!-- SETTINGS -->
+        <section id="settings">
+          <h1>Settings</h1>
+
+          <h3>Edit Profile</h3>
+          <form onsubmit="alert('Profile updated successfully.'); return false;">
+            <p>Full Name<br><input type="text" required></p>
+            <p>Email<br><input type="email" required></p>
+            <p>Phone Number<br><input type="tel" required></p>
+            <button type="submit">Save Changes</button>
+          </form>
+
+          <h3>Change Password</h3>
+          <form onsubmit="alert('Password changed successfully.'); return false;">
+            <p>Current Password<br><input type="password" required></p>
+            <p>New Password<br><input type="password" required></p>
+            <p>Confirm New Password<br><input type="password" required></p>
+            <button type="submit">Change Password</button>
+          </form>
+
+          <h3>Helpline &amp; Contact Info</h3>
+          <p>This is the information shown to users.</p>
+
+          <table border="1" cellpadding="8" cellspacing="0">
+            <tr><td><b>Helpline Phone</b></td><td id="showPhone"></td></tr>
+            <tr><td><b>Contact Email</b></td><td id="showEmail"></td></tr>
+            <tr><td><b>Operating Hours</b></td><td id="showHours"></td></tr>
+            <tr><td><b>Office Address</b></td><td id="showAddress"></td></tr>
+          </table>
+
+          <h4>Edit Helpline &amp; Contact Info</h4>
+          <form onsubmit="saveContact(); return false;">
+            <p>
+              <label for="hPhone">Helpline Phone</label><br>
+              <input type="tel" id="hPhone" size="40" required>
+            </p>
+            <p>
+              <label for="hEmail">Contact Email</label><br>
+              <input type="email" id="hEmail" size="40" required>
+            </p>
+            <p>
+              <label for="hHours">Operating Hours</label><br>
+              <input type="text" id="hHours" size="40" required>
+            </p>
+            <p>
+              <label for="hAddress">Office Address</label><br>
+              <textarea id="hAddress" rows="3" cols="40" required></textarea>
+            </p>
+            <button type="submit">Save Contact Info</button>
+          </form>
+
+          <h3>Logout</h3>
+          <p><a href="index.html" onclick="sessionStorage.clear();">Logout</a></p>
+        </section>
+
+      </td>
+    </tr>
+  </table>
+
+  <script>
+    // ---------- Demo data (replace with database later) ----------
+    var complaints = [
+      { id: "C006", date: "2026-11-25", user: "siti88",   category: "Public Cleaning", address: "Jalan Pasar, Section 7",   desc: "Rubbish piling up near the market entrance.", status: "Pending" },
+      { id: "C005", date: "2026-11-24", user: "user123",  category: "Domestic Waste",  address: "12 Jalan Mawar, Shah Alam", desc: "Garbage not collected for a week.",           status: "In Action" },
+      { id: "C004", date: "2026-11-18", user: "raj_k",    category: "Recycling",       address: "Block B, Taman Seri",       desc: "Recycling bin is overflowing.",               status: "In Action" },
+      { id: "C003", date: "2026-11-10", user: "user123",  category: "Public Cleaning", address: "Jalan Pasar, Section 7",   desc: "Litter along the drain.",                     status: "Completed" },
+      { id: "C002", date: "2026-10-29", user: "mei_ling", category: "Domestic Waste",  address: "45 Lorong Kenanga",         desc: "Illegal dumping beside the house.",           status: "Rejected" },
+      { id: "C001", date: "2026-10-15", user: "ahmad_f",  category: "Recycling",       address: "Taman Bunga Park",          desc: "Missing recycling bins.",                     status: "Closed" }
+    ];
+
+    var newsItems = [
+      { title: "New Recycling Centres Open in Selangor", date: "2026-11-20", location: "Shah Alam, Selangor",
+        content: "Three new community recycling centres have opened to make it easier for residents to drop off paper, plastic and glass. Operating hours are 8am to 6pm daily." },
+      { title: "Separate Waste Collection Schedule Begins", date: "2026-11-12", location: "Petaling Jaya, Selangor",
+        content: "Households are reminded to separate recyclables from general waste. Recyclables will be collected every Tuesday, general waste on other days." }
+    ];
+
+    var feedbacks = [
+      { date: "2026-11-25", user: "siti88",   message: "The complaint form is easy to use, but I would like to track my complaint with updates.", status: "New" },
+      { date: "2026-11-22", user: "user123",  message: "Garbage collection in my area has been faster since I reported it. Thank you!",         status: "New" },
+      { date: "2026-11-15", user: "raj_k",    message: "Please add more recycling centre locations in the news section.",                         status: "Reviewed" }
+    ];
+
+    var contact = {
+      phone: "1-800-000-000",
+      email: "support@example.com",
+      hours: "Monday to Friday, 8am to 5pm",
+      address: "[Office address]"
+    };
+
+    var statuses = ["Pending", "In Action", "Completed", "Rejected", "Closed"];
+
+    // Escape text so typed content can't break the page
+    function esc(s) {
+      return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+
+    // ---------- Counts + latest complaint ----------
+    function renderHome() {
+      function count(s) { return complaints.filter(function (c) { return c.status === s; }).length; }
+      document.getElementById("cTotal").textContent = complaints.length;
+      document.getElementById("cPending").textContent = count("Pending");
+      document.getElementById("cAction").textContent = count("In Action");
+      document.getElementById("cCompleted").textContent = count("Completed");
+      document.getElementById("cRejected").textContent = count("Rejected");
+      document.getElementById("cClosed").textContent = count("Closed");
+
+      var latest = complaints.slice().sort(function (a, b) {
+        return b.date.localeCompare(a.date) || b.id.localeCompare(a.id);
+      })[0];
+      document.getElementById("latestBody").innerHTML = latest
+        ? "<tr><td>" + esc(latest.id) + "</td><td>" + esc(latest.date) + "</td><td>" + esc(latest.user) +
+          "</td><td>" + esc(latest.category) + "</td><td>" + esc(latest.address) + "</td><td>" + esc(latest.status) + "</td></tr>"
+        : "<tr><td colspan='6'>No complaints yet.</td></tr>";
+    }
+
+    // ---------- Complaints table ----------
+    function renderComplaints() {
+      var filter = document.getElementById("filter").value;
+      var rows = "";
+      complaints.forEach(function (c, i) {
+        if (filter !== "All" && c.status !== filter) return;
+        var options = statuses.map(function (s) {
+          return "<option" + (s === c.status ? " selected" : "") + ">" + s + "</option>";
+        }).join("");
+        rows += "<tr>" +
+          "<td>" + esc(c.id) + "</td>" +
+          "<td>" + esc(c.date) + "</td>" +
+          "<td>" + esc(c.user) + "</td>" +
+          "<td>" + esc(c.category) + "</td>" +
+          "<td>" + esc(c.address) + "</td>" +
+          "<td>" + esc(c.desc) + "</td>" +
+          "<td>" + esc(c.status) + "</td>" +
+          "<td><select id='status" + i + "'>" + options + "</select> " +
+          "<button type='button' onclick='updateStatus(" + i + ")'>Update</button></td>" +
+          "</tr>";
+      });
+      document.getElementById("complaintBody").innerHTML =
+        rows || "<tr><td colspan='8'>No complaints found.</td></tr>";
+    }
+
+    function updateStatus(i) {
+      var newStatus = document.getElementById("status" + i).value;
+      complaints[i].status = newStatus;
+      alert("Complaint " + complaints[i].id + " status updated to " + newStatus + ".");
+      renderComplaints();
+      renderHome();
+    }
+
+    // ---------- News ----------
+    function renderNews() {
+      var html = "";
+      newsItems.forEach(function (n, i) {
+        html += "<article>" +
+          "<h3>" + esc(n.title) + "</h3>" +
+          "<p><b>Date:</b> " + esc(n.date) + " | <b>Location:</b> " + esc(n.location) + "</p>" +
+          "<p>" + esc(n.content) + "</p>" +
+          "<button type='button' onclick='deleteNews(" + i + ")'>Delete</button>" +
+          "<hr></article>";
+      });
+      document.getElementById("newsList").innerHTML = html || "<p>No news published yet.</p>";
+    }
+
+    function addNews() {
+      newsItems.unshift({
+        title: document.getElementById("ntitle").value,
+        date: document.getElementById("ndate").value,
+        location: document.getElementById("nlocation").value,
+        content: document.getElementById("ncontent").value
+      });
+      document.getElementById("newsForm").reset();
+      alert("News published successfully!");
+      renderNews();
+    }
+
+    function deleteNews(i) {
+      if (confirm("Delete this news item?")) {
+        newsItems.splice(i, 1);
+        renderNews();
+      }
+    }
+
+    // ---------- Feedback ----------
+    function renderFeedback() {
+      var rows = "";
+      var newCount = 0;
+      feedbacks.forEach(function (f, i) {
+        if (f.status === "New") newCount++;
+        rows += "<tr>" +
+          "<td>" + esc(f.date) + "</td>" +
+          "<td>" + esc(f.user) + "</td>" +
+          "<td>" + esc(f.message) + "</td>" +
+          "<td>" + esc(f.status) + "</td>" +
+          "<td>" +
+            (f.status === "New" ? "<button type='button' onclick='markReviewed(" + i + ")'>Mark as Reviewed</button> " : "") +
+            "<button type='button' onclick='deleteFeedback(" + i + ")'>Delete</button>" +
+          "</td></tr>";
+      });
+      document.getElementById("feedbackBody").innerHTML =
+        rows || "<tr><td colspan='5'>No feedback yet.</td></tr>";
+      document.getElementById("fTotal").textContent = feedbacks.length;
+      document.getElementById("fNew").textContent = newCount;
+      document.getElementById("fReviewed").textContent = feedbacks.length - newCount;
+    }
+
+    function markReviewed(i) {
+      feedbacks[i].status = "Reviewed";
+      renderFeedback();
+    }
+
+    function deleteFeedback(i) {
+      if (confirm("Delete this feedback?")) {
+        feedbacks.splice(i, 1);
+        renderFeedback();
+      }
+    }
+
+    // ---------- Helpline & contact info ----------
+    function renderContact() {
+      document.getElementById("showPhone").textContent = contact.phone;
+      document.getElementById("showEmail").textContent = contact.email;
+      document.getElementById("showHours").textContent = contact.hours;
+      document.getElementById("showAddress").textContent = contact.address;
+
+      document.getElementById("hPhone").value = contact.phone;
+      document.getElementById("hEmail").value = contact.email;
+      document.getElementById("hHours").value = contact.hours;
+      document.getElementById("hAddress").value = contact.address;
+    }
+
+    function saveContact() {
+      contact.phone = document.getElementById("hPhone").value;
+      contact.email = document.getElementById("hEmail").value;
+      contact.hours = document.getElementById("hHours").value;
+      contact.address = document.getElementById("hAddress").value;
+      renderContact();
+      alert("Helpline and contact info updated successfully.");
+    }
+
+    // ---------- Start ----------
+    var name = sessionStorage.getItem("username");
+    if (name) { document.getElementById("uname").textContent = name; }
+
+    renderHome();
+    renderComplaints();
+    renderNews();
+    renderFeedback();
+    renderContact();
+  </script>
+
+</body>
+</html>
