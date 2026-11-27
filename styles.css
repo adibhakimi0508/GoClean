@@ -97,7 +97,7 @@ center button { width: 100%; }
   background: var(--white);
   border-right: 1px solid var(--border);
 }
-.sidebar img { width: 160px; }
+.sidebar img { width: 160px; margin-bottom: 12px; }
 .sidebar ul { list-style: none; margin: 0; padding: 0; }
 .sidebar li a {
   display: block;
@@ -129,7 +129,7 @@ center button { width: 100%; }
 :root:has(#report:target) .sidebar a[href="#report"],
 :root:has(#news:target) .sidebar a[href="#news"],
 :root:has(#feedback:target) .sidebar a[href="#feedback"],
-:root:has(#settings:target) .sidebar a[href="#settings"] {
+.sidebar li a.active {
   background: var(--green);
   color: var(--white);
 }
@@ -175,6 +175,40 @@ article {
   margin-bottom: 12px;
 }
 article hr { display: none; }
+
+/* ---------- Page descriptions ---------- */
+.desc {
+  margin: 0 0 18px;
+  padding: 10px 14px;
+  background: var(--green-light);
+  border-left: 4px solid var(--green);
+  border-radius: 8px;
+  color: var(--green-deep);
+  font-size: 0.95em;
+}
+#home h1 + .desc { margin-top: 14px; }
+center .desc {
+  background: none;
+  border: 0;
+  padding: 0;
+  margin-bottom: 20px;
+  color: #5b6b62;
+}
+
+/* ---------- Settings menu list ---------- */
+.menu-list { list-style: none; margin: 0; padding: 0; max-width: 560px; }
+.menu-list a {
+  display: block;
+  margin-bottom: 10px;
+  padding: 14px 18px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: var(--text);
+}
+.menu-list a:hover { border-color: var(--green); text-decoration: none; }
+.menu-list b { display: block; color: var(--green-deep); }
+.menu-list span { display: block; font-size: 0.9em; color: #5b6b62; }
 
 /* ---------- Mobile ---------- */
 @media (max-width: 720px) {

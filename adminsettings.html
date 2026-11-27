@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Menu</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <table class="layout" width="100%" cellpadding="15" cellspacing="0">
+    <tr>
+
+      <!-- SIDEBAR -->
+      <td class="sidebar" valign="top">
+        <img src="logo.png" alt="[Logo]" width="100">
+        <ul>
+          <li><a href="admindashboard.html#home">Home</a></li>
+          <li><a href="admindashboard.html#complaint">Complaints</a></li>
+          <li><a href="admindashboard.html#news">News</a></li>
+          <li><a href="admindashboard.html#feedback">Feedback</a></li>
+          <li><a href="adminsettings.html" class="active">Menu</a></li>
+        </ul>
+      </td>
+
+      <!-- MAIN CONTENT -->
+      <td class="content" valign="top">
+        <div>
+          <h1>Menu</h1>
+          <p class="desc">Manage your admin account: update your profile, change your password, edit the helpline and contact information shown to users, or log out.</p>
+
+          <article>
+            <h3>Edit Profile</h3>
+            <form onsubmit="alert('Profile updated successfully.'); return false;">
+              <p>Full Name<br><input type="text" required></p>
+              <p>Email<br><input type="email" required></p>
+              <p>Phone Number<br><input type="tel" required></p>
+              <button type="submit">Save Changes</button>
+            </form>
+          </article>
+
+          <article>
+            <h3>Change Password</h3>
+            <form onsubmit="alert('Password changed successfully.'); return false;">
+              <p>Current Password<br><input type="password" required></p>
+              <p>New Password<br><input type="password" required></p>
+              <p>Confirm New Password<br><input type="password" required></p>
+              <button type="submit">Change Password</button>
+            </form>
+          </article>
+
+          <article>
+            <h3>Helpline &amp; Contact Info</h3>
+            <p>This is the information shown to users.</p>
+
+            <table cellpadding="8" cellspacing="0">
+              <tr><td><b>Helpline Phone</b></td><td id="showPhone"></td></tr>
+              <tr><td><b>Contact Email</b></td><td id="showEmail"></td></tr>
+              <tr><td><b>Operating Hours</b></td><td id="showHours"></td></tr>
+              <tr><td><b>Office Address</b></td><td id="showAddress"></td></tr>
+            </table>
+
+            <h4>Edit Helpline &amp; Contact Info</h4>
+            <form onsubmit="saveContact(); return false;">
+              <p>
+                <label for="hPhone">Helpline Phone</label><br>
+                <input type="tel" id="hPhone" required>
+              </p>
+              <p>
+                <label for="hEmail">Contact Email</label><br>
+                <input type="email" id="hEmail" required>
+              </p>
+              <p>
+                <label for="hHours">Operating Hours</label><br>
+                <input type="text" id="hHours" required>
+              </p>
+              <p>
+                <label for="hAddress">Office Address</label><br>
+                <textarea id="hAddress" rows="3" required></textarea>
+              </p>
+              <button type="submit">Save Contact Info</button>
+            </form>
+          </article>
+
+          <article>
+            <h3>Logout</h3>
+            <p><a href="index.html" onclick="sessionStorage.clear();">Logout</a></p>
+          </article>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <script>
+    var contact = {
+      phone: "1-800-000-000",
+      email: "support@example.com",
+      hours: "Monday to Friday, 8am to 5pm",
+      address: "[Office address]"
+    };
+
+    function renderContact() {
+      document.getElementById("showPhone").textContent = contact.phone;
+      document.getElementById("showEmail").textContent = contact.email;
+      document.getElementById("showHours").textContent = contact.hours;
+      document.getElementById("showAddress").textContent = contact.address;
+
+      document.getElementById("hPhone").value = contact.phone;
+      document.getElementById("hEmail").value = contact.email;
+      document.getElementById("hHours").value = contact.hours;
+      document.getElementById("hAddress").value = contact.address;
+    }
+
+    function saveContact() {
+      contact.phone = document.getElementById("hPhone").value;
+      contact.email = document.getElementById("hEmail").value;
+      contact.hours = document.getElementById("hHours").value;
+      contact.address = document.getElementById("hAddress").value;
+      renderContact();
+      alert("Helpline and contact info updated successfully.");
+    }
+
+    renderContact();
+  </script>
+</body>
+</html>

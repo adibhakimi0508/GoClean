@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Menu</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <table class="layout" width="100%" cellpadding="15" cellspacing="0">
+    <tr>
+
+      <!-- SIDEBAR -->
+      <td class="sidebar" valign="top">
+        <img src="logo.png" alt="[Logo]" width="100">
+        <ul>
+          <li><a href="userdashboard.html#home">Home</a></li>
+          <li><a href="userdashboard.html#complaint">Complaint</a></li>
+          <li><a href="userdashboard.html#report">Report</a></li>
+          <li><a href="userdashboard.html#news">News</a></li>
+          <li><a href="usersettings.html" class="active">Menu</a></li>
+        </ul>
+      </td>
+
+      <!-- MAIN CONTENT -->
+      <td class="content" valign="top">
+        <div>
+          <h1>Menu</h1>
+          <p class="desc">Manage your account here. Choose an option below to view your profile, change your password, send feedback, contact the helpline or log out.</p>
+
+          <ul class="menu-list">
+            <li><a href="userprofile.html"><b>Profile</b><span>View and update your personal information.</span></a></li>
+            <li><a href="userpassword.html"><b>Change Password</b><span>Set a new password for your account.</span></a></li>
+            <li><a href="userfeedback.html"><b>Feedback</b><span>Send us your comments and suggestions.</span></a></li>
+            <li><a href="userhelpline.html"><b>Helpline</b><span>Contact our support team for help.</span></a></li>
+            <li><a href="index.html" onclick="sessionStorage.clear();"><b>Logout</b><span>Sign out of your account.</span></a></li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

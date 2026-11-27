@@ -13,13 +13,12 @@
       <!-- SIDEBAR -->
       <td class="sidebar" valign="top">
         <img src="logo.png" alt="[Logo]" width="100">
-        <h3>Admin Menu</h3>
         <ul>
           <li><a href="#home">Home</a></li>
           <li><a href="#complaint">Complaints</a></li>
           <li><a href="#news">News</a></li>
           <li><a href="#feedback">Feedback</a></li>
-          <li><a href="#settings">Settings</a></li>
+          <li><a href="adminsettings.html">Menu</a></li>
         </ul>
       </td>
 
@@ -29,6 +28,7 @@
         <!-- HOME -->
         <section id="home">
           <h1>Welcome! <span id="uname">Admin</span></h1>
+          <p class="desc">Overview of all complaints from users: how many are in each status, and the latest complaint received.</p>
 
           <table class="stats" cellpadding="12" cellspacing="0" width="100%">
             <tr align="center">
@@ -57,7 +57,7 @@
         <!-- COMPLAINTS -->
         <section id="complaint">
           <h1>Manage Complaints</h1>
-          <p>Select a new status for a complaint, then click Update.</p>
+          <p class="desc">Review the complaints submitted by users and update their status as you handle them. Choose a new status in the last column and click Update. Use the filter to show only one status.</p>
 
           <p>
             <label for="filter">Filter by status:</label>
@@ -93,6 +93,7 @@
         <!-- NEWS -->
         <section id="news">
           <h1>Manage News</h1>
+          <p class="desc">Publish news about waste management and recycling. News you add appears on the user dashboard. You can also delete news that is no longer needed.</p>
 
           <h3>Add News</h3>
           <form id="newsForm" onsubmit="addNews(); return false;">
@@ -124,6 +125,7 @@
         <!-- FEEDBACK -->
         <section id="feedback">
           <h1>User Feedback</h1>
+          <p class="desc">Read the feedback sent by users. Mark feedback as reviewed once you have read it, or delete it.</p>
           <p>Total: <b id="fTotal">0</b> | New: <b id="fNew">0</b> | Reviewed: <b id="fReviewed">0</b></p>
 
           <table border="1" cellpadding="8" cellspacing="0" width="100%">
@@ -140,67 +142,11 @@
           </table>
         </section>
 
-        <hr>
-
-        <!-- SETTINGS -->
-        <section id="settings">
-          <h1>Settings</h1>
-
-          <h3>Edit Profile</h3>
-          <form onsubmit="alert('Profile updated successfully.'); return false;">
-            <p>Full Name<br><input type="text" required></p>
-            <p>Email<br><input type="email" required></p>
-            <p>Phone Number<br><input type="tel" required></p>
-            <button type="submit">Save Changes</button>
-          </form>
-
-          <h3>Change Password</h3>
-          <form onsubmit="alert('Password changed successfully.'); return false;">
-            <p>Current Password<br><input type="password" required></p>
-            <p>New Password<br><input type="password" required></p>
-            <p>Confirm New Password<br><input type="password" required></p>
-            <button type="submit">Change Password</button>
-          </form>
-
-          <h3>Helpline &amp; Contact Info</h3>
-          <p>This is the information shown to users.</p>
-
-          <table border="1" cellpadding="8" cellspacing="0">
-            <tr><td><b>Helpline Phone</b></td><td id="showPhone"></td></tr>
-            <tr><td><b>Contact Email</b></td><td id="showEmail"></td></tr>
-            <tr><td><b>Operating Hours</b></td><td id="showHours"></td></tr>
-            <tr><td><b>Office Address</b></td><td id="showAddress"></td></tr>
-          </table>
-
-          <h4>Edit Helpline &amp; Contact Info</h4>
-          <form onsubmit="saveContact(); return false;">
-            <p>
-              <label for="hPhone">Helpline Phone</label><br>
-              <input type="tel" id="hPhone" size="40" required>
-            </p>
-            <p>
-              <label for="hEmail">Contact Email</label><br>
-              <input type="email" id="hEmail" size="40" required>
-            </p>
-            <p>
-              <label for="hHours">Operating Hours</label><br>
-              <input type="text" id="hHours" size="40" required>
-            </p>
-            <p>
-              <label for="hAddress">Office Address</label><br>
-              <textarea id="hAddress" rows="3" cols="40" required></textarea>
-            </p>
-            <button type="submit">Save Contact Info</button>
-          </form>
-
-          <h3>Logout</h3>
-          <p><a href="index.html" onclick="sessionStorage.clear();">Logout</a></p>
-        </section>
-
       </td>
     </tr>
   </table>
 
+  <script src="news.js"></script>
   <script>
     // ---------- Demo data (replace with database later) ----------
     var complaints = [
@@ -212,12 +158,7 @@
       { id: "C001", date: "2026-10-15", user: "ahmad_f",  category: "Recycling",       address: "Taman Bunga Park",          desc: "Missing recycling bins.",                     status: "Closed" }
     ];
 
-    var newsItems = [
-      { title: "New Recycling Centres Open in Selangor", date: "2026-11-20", location: "Shah Alam, Selangor",
-        content: "Three new community recycling centres have opened to make it easier for residents to drop off paper, plastic and glass. Operating hours are 8am to 6pm daily." },
-      { title: "Separate Waste Collection Schedule Begins", date: "2026-11-12", location: "Petaling Jaya, Selangor",
-        content: "Households are reminded to separate recyclables from general waste. Recyclables will be collected every Tuesday, general waste on other days." }
-    ];
+    var newsItems = getNews(); // shared with the user dashboard (news.js)
 
     var feedbacks = [
       { date: "2026-11-25", user: "siti88",   message: "The complaint form is easy to use, but I would like to track my complaint with updates.", status: "New" },
@@ -225,19 +166,7 @@
       { date: "2026-11-15", user: "raj_k",    message: "Please add more recycling centre locations in the news section.",                         status: "Reviewed" }
     ];
 
-    var contact = {
-      phone: "1-800-000-000",
-      email: "support@example.com",
-      hours: "Monday to Friday, 8am to 5pm",
-      address: "[Office address]"
-    };
-
     var statuses = ["Pending", "In Action", "Completed", "Rejected", "Closed"];
-
-    // Escape text so typed content can't break the page
-    function esc(s) {
-      return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-    }
 
     // ---------- Counts + latest complaint ----------
     function renderHome() {
@@ -312,6 +241,8 @@
         location: document.getElementById("nlocation").value,
         content: document.getElementById("ncontent").value
       });
+      newsItems = sortNews(newsItems);
+      saveNews(newsItems);
       document.getElementById("newsForm").reset();
       alert("News published successfully!");
       renderNews();
@@ -320,6 +251,7 @@
     function deleteNews(i) {
       if (confirm("Delete this news item?")) {
         newsItems.splice(i, 1);
+        saveNews(newsItems);
         renderNews();
       }
     }
@@ -359,28 +291,6 @@
       }
     }
 
-    // ---------- Helpline & contact info ----------
-    function renderContact() {
-      document.getElementById("showPhone").textContent = contact.phone;
-      document.getElementById("showEmail").textContent = contact.email;
-      document.getElementById("showHours").textContent = contact.hours;
-      document.getElementById("showAddress").textContent = contact.address;
-
-      document.getElementById("hPhone").value = contact.phone;
-      document.getElementById("hEmail").value = contact.email;
-      document.getElementById("hHours").value = contact.hours;
-      document.getElementById("hAddress").value = contact.address;
-    }
-
-    function saveContact() {
-      contact.phone = document.getElementById("hPhone").value;
-      contact.email = document.getElementById("hEmail").value;
-      contact.hours = document.getElementById("hHours").value;
-      contact.address = document.getElementById("hAddress").value;
-      renderContact();
-      alert("Helpline and contact info updated successfully.");
-    }
-
     // ---------- Start ----------
     var name = sessionStorage.getItem("username");
     if (name) { document.getElementById("uname").textContent = name; }
@@ -389,7 +299,6 @@
     renderComplaints();
     renderNews();
     renderFeedback();
-    renderContact();
   </script>
 
 </body>

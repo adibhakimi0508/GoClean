@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <table class="layout" width="100%" cellpadding="15" cellspacing="0">
+    <tr>
+
+      <!-- SIDEBAR -->
+      <td class="sidebar" valign="top">
+        <img src="logo.png" alt="[Logo]" width="100">
+        <ul>
+          <li><a href="userdashboard.html#home">Home</a></li>
+          <li><a href="userdashboard.html#complaint">Complaint</a></li>
+          <li><a href="userdashboard.html#report">Report</a></li>
+          <li><a href="userdashboard.html#news">News</a></li>
+          <li><a href="usersettings.html" class="active">Menu</a></li>
+        </ul>
+      </td>
+
+      <!-- MAIN CONTENT -->
+      <td class="content" valign="top">
+        <div>
+          <p><a href="usersettings.html">&larr; Back to Menu</a></p>
+          <h1>Profile</h1>
+          <p class="desc">View your personal information and update it if anything has changed. Press Save Changes to confirm.</p>
+
+          <article>
+            <h3>Your Information</h3>
+            <table cellpadding="8" cellspacing="0">
+            <tr><td><b>Username</b></td><td id="showUsername"></td></tr>
+            <tr><td><b>Full Name</b></td><td id="show_fullname"></td></tr>
+            <tr><td><b>Email</b></td><td id="show_email"></td></tr>
+            <tr><td><b>Phone Number</b></td><td id="show_phone"></td></tr>
+            <tr><td><b>Address</b></td><td id="show_address"></td></tr>
+            <tr><td><b>Postcode</b></td><td id="show_postcode"></td></tr>
+            <tr><td><b>State</b></td><td id="show_state"></td></tr>
+            <tr><td><b>Country</b></td><td id="show_country"></td></tr>
+            </table>
+          </article>
+
+          <article>
+            <h3>Edit Profile</h3>
+            <form onsubmit="saveProfile(); return false;">
+            <p>
+              <label for="edit_fullname">Full Name</label><br>
+              <input type="text" id="edit_fullname" required>
+            </p>
+            <p>
+              <label for="edit_email">Email</label><br>
+              <input type="email" id="edit_email" required>
+            </p>
+            <p>
+              <label for="edit_phone">Phone Number</label><br>
+              <input type="tel" id="edit_phone" required>
+            </p>
+            <p>
+              <label for="edit_address">Address</label><br>
+              <textarea id="edit_address" rows="3" required></textarea>
+            </p>
+            <p>
+              <label for="edit_postcode">Postcode</label><br>
+              <input type="text" id="edit_postcode" required>
+            </p>
+            <p>
+              <label for="edit_state">State</label><br>
+              <input type="text" id="edit_state" required>
+            </p>
+            <p>
+              <label for="edit_country">Country</label><br>
+              <input type="text" id="edit_country" required>
+            </p>
+            <button type="submit">Save Changes</button>
+            </form>
+          </article>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <script>
+    // Demo data (replace with database later)
+    var profile = {
+      username: sessionStorage.getItem("username") || "user123",
+      fullname: "Demo User",
+      email: "demo@example.com",
+      phone: "012-345 6789",
+      address: "12 Jalan Mawar, Shah Alam",
+      postcode: "40000",
+      state: "Selangor",
+      country: "Malaysia"
+    };
+    var fields = ["fullname", "email", "phone", "address", "postcode", "state", "country"];
+
+    function renderProfile() {
+      document.getElementById("showUsername").textContent = profile.username;
+      fields.forEach(function (f) {
+        document.getElementById("show_" + f).textContent = profile[f];
+        document.getElementById("edit_" + f).value = profile[f];
+      });
+    }
+
+    function saveProfile() {
+      fields.forEach(function (f) {
+        profile[f] = document.getElementById("edit_" + f).value;
+      });
+      renderProfile();
+      alert("Profile updated successfully.");
+    }
+
+    renderProfile();
+  </script>
+</body>
+</html>

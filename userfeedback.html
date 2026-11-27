@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Feedback</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <table class="layout" width="100%" cellpadding="15" cellspacing="0">
+    <tr>
+
+      <!-- SIDEBAR -->
+      <td class="sidebar" valign="top">
+        <img src="logo.png" alt="[Logo]" width="100">
+        <ul>
+          <li><a href="userdashboard.html#home">Home</a></li>
+          <li><a href="userdashboard.html#complaint">Complaint</a></li>
+          <li><a href="userdashboard.html#report">Report</a></li>
+          <li><a href="userdashboard.html#news">News</a></li>
+          <li><a href="usersettings.html" class="active">Menu</a></li>
+        </ul>
+      </td>
+
+      <!-- MAIN CONTENT -->
+      <td class="content" valign="top">
+        <div>
+          <p><a href="usersettings.html">&larr; Back to Menu</a></p>
+          <h1>Feedback</h1>
+          <p class="desc">Tell us what you think about the system or the waste management service. Your feedback is sent to the administrators to help us improve.</p>
+
+          <article>
+            <form onsubmit="alert('Thank you for your feedback!'); this.reset(); return false;">
+              <p>
+                <label for="feedback">Your Feedback</label><br>
+                <textarea id="feedback" rows="6" required></textarea>
+              </p>
+              <button type="submit">Send Feedback</button>
+            </form>
+          </article>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>
